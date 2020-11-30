@@ -133,22 +133,14 @@ def dropsession():
 
 # Create a instance to PostSQL DB
 
+DATABASE_URL = os.environ['DATABASE_URL']
 
-# Postgres username, password, and database name
-POSTGRES_ADDRESS = 'localhost'
-POSTGRES_PORT = '5432'
-POSTGRES_USERNAME = 'postgres'
-POSTGRES_PASSWORD = 'Sparky89!'
-POSTGRES_DBNAME = 'C964'
-# A long string that contains the necessary Postgres login information
-postgres_str = ('postgresql://{username}:{password}@{ipaddress}:{port}/{dbname}'
-                .format(username=POSTGRES_USERNAME,
-                        password=POSTGRES_PASSWORD,
-                        ipaddress=POSTGRES_ADDRESS,
-                        port=POSTGRES_PORT,
-                        dbname=POSTGRES_DBNAME))
 # Create the connection
-cnx = create_engine(postgres_str)
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+cur = conn.cursor()
+
+# Create search engine
+cnx = create_engine(DATABASE_URL)
 
 # Create variables for scatter plot graph
 tsh = pd.read_sql_query('''select dx, age, tsh from thyroid where age <> '?' and tsh <> '?' ''', cnx)
@@ -321,6 +313,10 @@ app.layout = html.Div([
     ]),
 ]
 )
+
+# Close connection
+cur.close()
+conn.close()
 
 if __name__ == "__main__":
     server.run(debug=True)
