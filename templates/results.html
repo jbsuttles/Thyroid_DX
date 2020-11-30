@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+<div class="main">
+<div class="menu">
+    <ul>
+        <li><a class="active" href=" {{ url_for('main') }}">Main</a> </li>
+        <li><a href=" {{ url_for('/dashboard/') }}">Data Visualization and Dataset</a> </li>
+        <li style="float:right"><a href=" {{ url_for('dropsession') }}">Logout</a> </li>
+    </ul>
+</div>
+<div class="main-screen">
+    <h1><center>Results</center></h1>
+{% if patient_dx[0][0] > 0.5 %}
+    <center><h3>Patient's probability of being negative of hypothyroidism is {{ patient_dx[0][0] *100 }}%.</h3></center>
+{% else %}
+    <center><h3>Patient's probability of having hypothyroidism is {{ patient_dx[0][1] *100 }}%.</h3></center>
+{% endif %}
+</div>
+</div>
