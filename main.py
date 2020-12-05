@@ -249,7 +249,7 @@ fig_pg = px.pie(pie_graph, values="# of Orders", names="Laboratory Tests")
 
 fig_pg.update_layout(
     title={
-        'text': '<b># of Laboratory Test Used for Thyroid Diagnosis</b>',
+        'text': '<b># of Laboratory Test Used for Hypothyroid Diagnosis</b>',
         'x': 0.5,
         'xanchor': 'center',
         'yanchor': 'top'
