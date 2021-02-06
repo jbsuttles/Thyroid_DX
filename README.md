@@ -1,4 +1,5 @@
 # Thyroid_DX
+* If login page does not work, please refresh page. Currently using hobby teir of Heroku dynos and they need to spin up. Thanks! *
 Login:
 - Username: admin
 - Password: admin
